@@ -65,3 +65,37 @@ def test_project_str_is_readable(sample_project):
     assert "Contact potential family/acquaintances" in result
     assert str(sample_project.due_date) in result
 
+@pytest.fixture
+def sample_task():
+    return Task(title="Sweep", status="To Do", assigned_to="John")
+
+def test_task_has_title(sample_task):
+    assert sample_task.title == "Sweep"
+
+def test_task_has_status(sample_task):
+    assert sample_task.status == "To Do"
+
+def test_task_has_assigned_to(sample_task):
+    assert sample_task.assigned_to == "John"
+
+def test_task_default_status_is_to_do():
+    task = Task(title="dust", assigned_to="John")
+    assert task.status == "To Do"
+
+def test_task_invalid_status_raises_error():
+    with pytest.raises(ValueError):
+        Task(title="dust", status="Invalid", assigned_to="John")
+
+def test_task_has_id(sample_task):
+    assert sample_task.id is not None
+
+def test_two_tasks_have_unique_id(sample_task):
+    task_two = Task(title="Mop", assigned_to="John")
+    assert sample_task.id != task_two.id
+
+def test_task_str_is_readable(sample_task):
+    result = str(sample_task)
+    assert "Sweep" in result
+    assert "To Do" in result
+    assert "John" in result 
+
