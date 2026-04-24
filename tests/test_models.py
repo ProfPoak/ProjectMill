@@ -15,6 +15,10 @@ def test_user_has_name(sample_user):
 def test_user_has_email(sample_user):
     assert sample_user.email == "john@doe.com"
 
+def test_user_invalid_email_raises_error():
+    with pytest.raises(ValueError):
+        User(name="John", email="notanemail")
+
 def test_user_has_id(sample_user):
     assert sample_user.id is not None
 
