@@ -2,8 +2,7 @@ import argparse
 from models.user import User
 from models.project import Project
 from models.task import Task
-from utils.storage import save, load
-from utils.helpers import load_users
+from utils.helpers import load_users, save_users
 
 def main():
     parser = argparse.ArgumentParser(
@@ -52,12 +51,11 @@ def main():
         parser.print_help()
 
     elif args.command == "add-user":
-        data = load_users
+        data = load_users()
 
         try:
             user = User(name=args.name, email=args.email)
-            data["users"] = [user.to_dict() for user in User.all]
-            save(data)
+            save_users(data)
             print(f"User '{user.name}' added successfully!")
         except ValueError as e:
             print(f"Error: {e}")
@@ -67,6 +65,21 @@ def main():
 
         for user in User.all:
             print(user)
+
+    elif args.command == "add-project":
+        data = load_users()
+        user = next((u for u in User.all if u.id == args.user_id), None)
+        if user is None:
+            print(f"Error: No user found with ID {args.user_id}")
+            return
+        try:
+            project = Project(title=args.title, description=args.description, due_date=args.due_date)
+            user.projects.append(project)
+            save_users(data)
+            print(f"Project '{project.title}' successfully added")
+        except ValueError as e:
+            print(f"Error: {e}")
+
     
 
 if __name__ == "__main__":
