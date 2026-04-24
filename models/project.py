@@ -1,4 +1,5 @@
-from datetime import datetime, date
+from datetime import datetime
+from models.task import Task
 
 class Project:
     _id_counter = 0
@@ -27,3 +28,24 @@ class Project:
     
     def __repr__(self):
         return f"Project(id={self.id}, title={self.title}, description={self.description}, due_date={self.due_date})"
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "due_date": str(self.due_date),
+            "tasks": [task.to_dict() for task in self.tasks]
+        }
+    
+    @classmethod
+    def from_dict(cls, data):
+        project = cls(
+            title=data["title"],
+            description=data["description"],
+            due_date=data["due_date"]
+        )
+        project.id = data["id"]
+        Project._id_counter = max(Project._id_counter, data["id"])
+        project.tasks = [Task.from_dict(task) for task in data["tasks"]]
+        return project
