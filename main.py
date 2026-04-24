@@ -1,0 +1,54 @@
+import argparse
+from models.user import User
+from models.project import Project
+from models.task import Task
+from utils.storage import save, load
+
+def main():
+    parser = argparse.ArgumentParser(
+        prog="pmill",
+        description="ProjectMill - CLI project management tool"
+    )
+
+    subparsers = parser.add_subparsers(dest="command", help="Available commands")
+
+    # add-user
+    add_user_parser = subparsers.add_parser("add-user", help="Add a new user")
+    add_user_parser.add_argument("--name", required=True, help="User's name")
+    add_user_parser.add_argument("--email", required=True, help="User's email")
+
+    #list-users
+    subparsers.add_parser("list-users", help="List all users")
+
+    #add-project
+    add_project_parser = subparsers.add_parser("add-project", help="Add a new project")
+    add_project_parser.add_argument("--title", required=True, help="Project title")
+    add_project_parser.add_argument("--description", required=True, help="Project description")
+    add_project_parser.add_argument("--due-date", required=True, help="Due date (YYYY-MM-DD)")
+    add_project_parser.add_argument("--user-id", required=True, type=int, help="ID of the user to assign project to")
+
+    #list-projects
+    subparsers.add_parser("list-projects", help="List all projects")
+
+    #add-task
+    add_task_parser = subparsers.add_parser("add-task", help="Add a new task")
+    add_task_parser.add_argument("--title", required=True, help="Task Title")
+    add_task_parser.add_argument("--assigned-to", required=True, help="Name of user to assign task to")
+    add_task_parser.add_argument("--project-id", required=True, type=int, help="ID of the project to add task to")
+
+    #list-tasks
+    list_tasks_parser = subparsers.add_parser("list-tasks", help="List all tasks for a project")
+    list_tasks_parser.add_argument("--project-id", required=True, type=int, help="Id of the project")
+
+    # complete-task
+    complete_task_parser = subparsers.add_parser("complete-task", help="Mark a task as completed")
+    complete_task_parser.add_argument("--task-id", required=True, type=int, help="ID of the task to complete")
+    complete_task_parser.add_argument("--project-id", required=True, type=int, help="ID of the project the task belongs to")
+
+    args = parser.parse_args()
+
+    if args.command is None:
+        parser.print_help()
+
+if __name__ == "__main__":
+    main()
