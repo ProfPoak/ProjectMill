@@ -26,4 +26,4 @@ class Project:
         return f"Project #{self.id} | {self.title} | {self.description} | Due: {self.due_date}"
     
     def __repr__(self):
-        return f"Project(id={self.id}, title={self.title}, description={self.description} due_date={self.due_date})"
+        return f"Project(id={self.id}, title={self.title}, description={self.description}, due_date={self.due_date})"

@@ -36,3 +36,22 @@ class Task:
 
     def __repr__(self):
         return f"Task(id={self.id}, title={self.title}, status={self.status}, assigned_to={self.assigned_to})"
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "status": self.status,
+            "assigned_to": self.assigned_to
+        }
+    
+    @classmethod
+    def from_dict(cls, data):
+        task = cls(
+            title=data["title"],
+            status=data["status"],
+            assigned_to=data["assigned_to"]
+        )
+        task.id = data["id"]
+        Task._id_counter = max(Task._id_counter, data["id"])
+        return task
