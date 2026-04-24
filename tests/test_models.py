@@ -4,6 +4,7 @@ from models.user import User
 from models.project import Project
 from models.task import Task
 
+#User class tests
 @pytest.fixture
 def sample_user():
     return User(name="John", email="john@doe.com")
@@ -29,6 +30,7 @@ def test_user_str_is_readable(sample_user):
     assert "John" in result
     assert "john@doe.com" in result
 
+#Project class tests
 @pytest.fixture
 def sample_project():
     return Project(title="identify John", description="Contact potential family/acquaintances", due_date="2026-04-25")
@@ -65,6 +67,7 @@ def test_project_str_is_readable(sample_project):
     assert "Contact potential family/acquaintances" in result
     assert str(sample_project.due_date) in result
 
+# Task class tests
 @pytest.fixture
 def sample_task():
     return Task(title="Sweep", status="To Do", assigned_to="John")
