@@ -23,7 +23,7 @@ class Project:
             raise ValueError(f"Invalid date format: {value}. Please use YYYY-MM-DD")
         
     def __str__(self):
-        return f"Project #{self.id} | {self.title} | Due: {self.due_date}"
+        return f"Project #{self.id} | {self.title} | {self.description} | Due: {self.due_date}"
     
     def __repr__(self):
-        return f"Project(id={self.id}, title={self.title}, due_date={self.due_date})"
+        return f"Project(id={self.id}, title={self.title}, description={self.description} due_date={self.due_date})"
