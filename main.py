@@ -59,8 +59,8 @@ def main():
         try:
             user = User(name=args.name, email=args.email)
             save_users(data)
-            logger.info(f"User created: {user.name} ({user.email})")
-            print(f"User '{user.name}' added successfully!")
+            logger.info(f"User created: #{user.id} {user.name} ({user.email})")
+            print(f"User '{user.name}' added successfully! (ID: {user.id})")
         except ValueError as e:
             logger.error(f"Failed to create user: {e}")
             print(f"Error: {e}")
@@ -84,8 +84,8 @@ def main():
             project = Project(title=args.title, description=args.description, due_date=args.due_date)
             user.projects.append(project)
             save_users(data)
-            logger.info(f"Project created: '{project.title}' for user #{args.user_id}")
-            print(f"Project '{project.title}' successfully added")
+            logger.info(f"Project created: #{project.id} '{project.title}' for user #{args.user_id}")
+            print(f"Project '{project.title}' successfully added (ID: {project.id})")
         except ValueError as e:
             logger.error(f"Failed to create project: {e}")
             print(f"Error: {e}")
@@ -119,8 +119,8 @@ def main():
             task = Task(title=args.title, assigned_to=args.assigned_to)
             project.tasks.append(task)
             save_users(data)
-            logger.info(f"Task created: '{task.title}' assigned to {args.assigned_to} in project #{args.project_id}")
-            print(f"Task '{task.title}' successfully added")
+            logger.info(f"Task created: #{task.id} '{task.title}' assigned to {args.assigned_to} in project #{args.project_id}")
+            print(f"Task '{task.title}' successfully added (ID: {task.id})")
         except ValueError as e:
             logger.error(f"Failed to create task: {e}")
             print(f"Error: {e}")
