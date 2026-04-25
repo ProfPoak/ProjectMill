@@ -117,5 +117,24 @@ def main():
         for task in project.tasks:
             print(task)
 
+    elif args.command == "complete-task":
+        data = load_users()
+        project = find_project(args.project_id)
+        if project is None:
+            print(f"Error: No project found with ID {args.project_id}")
+            return
+        task = None
+        for t in project.tasks:
+            if t.id == args.task_id:
+                task = t
+                break
+        if task is None:
+            print(f"Error: No task found with ID {args.task_id}")
+            return
+        task.status = "Completed"
+        save_users(data)
+        print(f"Task '{task.title}' updated to '{task.status}'")
+            
+
 if __name__ == "__main__":
     main()
