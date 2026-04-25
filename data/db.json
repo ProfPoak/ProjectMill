@@ -1,1 +1,25 @@
-{}
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "Test",
+            "email": "test@mail.com",
+            "projects": [
+                {
+                    "id": 1,
+                    "title": "Code",
+                    "description": "develop a coding project",
+                    "due_date": "2026-04-25",
+                    "tasks": [
+                        {
+                            "id": 1,
+                            "title": "Type practice",
+                            "status": "To Do",
+                            "assigned_to": "Test"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+2026-04-25 09:57:07,684 - __main__ - INFO - list-users command called
+2026-04-25 09:57:07,684 - utils.storage - DEBUG - Loading data from data/db.json
+2026-04-25 09:57:07,694 - __main__ - INFO - Successfully listed users
+2026-04-25 09:57:24,715 - __main__ - INFO - list-projects command called
+2026-04-25 09:57:24,715 - utils.storage - DEBUG - Loading data from data/db.json
+2026-04-25 09:57:24,718 - __main__ - INFO - Successfully listed projects
+2026-04-25 09:57:50,295 - __main__ - INFO - list-tasks command called
+2026-04-25 09:57:50,296 - utils.storage - DEBUG - Loading data from data/db.json
+2026-04-25 09:57:50,296 - __main__ - ERROR - No project found with ID 1
+2026-04-25 09:58:06,320 - __main__ - INFO - add-user command called
+2026-04-25 09:58:06,320 - utils.storage - DEBUG - Loading data from data/db.json
+2026-04-25 09:58:06,488 - __main__ - ERROR - Failed to create user: Invalid email address
+2026-04-25 09:58:25,122 - __main__ - INFO - add-user command called
+2026-04-25 09:58:25,122 - utils.storage - DEBUG - Loading data from data/db.json
+2026-04-25 09:58:25,237 - utils.storage - DEBUG - Saving data to data/db.json
+2026-04-25 09:58:25,237 - __main__ - INFO - User created: #1 Test (test@mail.com)
+2026-04-25 09:58:31,230 - __main__ - INFO - list-users command called
+2026-04-25 09:58:31,230 - utils.storage - DEBUG - Loading data from data/db.json
+2026-04-25 09:58:31,320 - __main__ - INFO - Successfully listed users
+2026-04-25 10:00:36,223 - __main__ - INFO - add-project command called
+2026-04-25 10:00:36,223 - utils.storage - DEBUG - Loading data from data/db.json
+2026-04-25 10:00:36,328 - utils.storage - DEBUG - Saving data to data/db.json
+2026-04-25 10:00:36,328 - __main__ - INFO - Project created: #1 'Code' for user #1
+2026-04-25 10:00:45,731 - __main__ - INFO - list-projects command called
+2026-04-25 10:00:45,731 - utils.storage - DEBUG - Loading data from data/db.json
+2026-04-25 10:00:45,825 - __main__ - INFO - Successfully listed projects
+2026-04-25 10:02:41,330 - __main__ - INFO - add-task command called
+2026-04-25 10:02:41,330 - utils.storage - DEBUG - Loading data from data/db.json
+2026-04-25 10:02:41,418 - utils.storage - DEBUG - Saving data to data/db.json
+2026-04-25 10:02:41,418 - __main__ - INFO - Task created: #1 'Type practice' assigned to Test in project #1
+2026-04-25 10:02:58,620 - __main__ - INFO - list-tasks command called
+2026-04-25 10:02:58,621 - utils.storage - DEBUG - Loading data from data/db.json
+2026-04-25 10:02:58,711 - __main__ - INFO - Successfully listed tasks for project #1
