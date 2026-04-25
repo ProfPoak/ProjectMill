@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "projectmill"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "rich",
+    "email-validator",
+]
+
+[project.scripts]
+pmill = "main:main"
+
+[tool.setuptools.packages.find]
+include = ["models*", "utils*"]
+
+[tool.setuptools]
+py-modules = ["main"]
