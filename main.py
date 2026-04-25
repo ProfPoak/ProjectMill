@@ -80,6 +80,18 @@ def main():
         except ValueError as e:
             print(f"Error: {e}")
 
+    elif args.command == "list-projects":
+        data = load_users()
+        for user in User.all:
+            print(user)
+            if user.projects:
+                for project in user.projects:
+                    print(f"  {project}")
+            else:
+                print("  No projects")
+
+    elif args.command == "add-task":
+        data = load_users()
     
 
 if __name__ == "__main__":
