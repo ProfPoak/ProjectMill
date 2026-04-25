@@ -1,1 +1,31 @@
-{}
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "John",
+            "email": "john@doe.com",
+            "projects": [
+                {
+                    "id": 1,
+                    "title": "Test Project",
+                    "description": "A test",
+                    "due_date": "2026-12-31",
+                    "tasks": [
+                        {
+                            "id": 1,
+                            "title": "Research",
+                            "status": "Completed",
+                            "assigned_to": "John"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Jane",
+            "email": "Jane@doe.com",
+            "projects": []
+        }
+    ]
+}
