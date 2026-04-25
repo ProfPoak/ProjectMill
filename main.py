@@ -3,6 +3,9 @@ from models.user import User
 from models.project import Project
 from models.task import Task
 from utils.helpers import load_users, save_users, find_project
+import logging
+
+logger= logging.getLogger(__name__)
 
 def main():
     parser = argparse.ArgumentParser(
@@ -51,36 +54,44 @@ def main():
         parser.print_help()
 
     elif args.command == "add-user":
+        logger.info("add-user command called")
         data = load_users()
-
         try:
             user = User(name=args.name, email=args.email)
             save_users(data)
+            logger.info(f"User created: {user.name} ({user.email})")
             print(f"User '{user.name}' added successfully!")
         except ValueError as e:
+            logger.error(f"Failed to create user: {e}")
             print(f"Error: {e}")
 
     elif args.command == "list-users":
+        logger.info("list-users command called")
         data = load_users()
-
         for user in User.all:
             print(user)
+        logger.info("Successfully listed users")
 
     elif args.command == "add-project":
+        logger.info("add-project command called")
         data = load_users()
         user = next((u for u in User.all if u.id == args.user_id), None)
         if user is None:
+            logger.error(f"No user found with ID {args.user_id}")
             print(f"Error: No user found with ID {args.user_id}")
             return
         try:
             project = Project(title=args.title, description=args.description, due_date=args.due_date)
             user.projects.append(project)
             save_users(data)
+            logger.info(f"Project created: '{project.title}' for user #{args.user_id}")
             print(f"Project '{project.title}' successfully added")
         except ValueError as e:
+            logger.error(f"Failed to create project: {e}")
             print(f"Error: {e}")
 
     elif args.command == "list-projects":
+        logger.info("list-projects command called")
         data = load_users()
         for user in User.all:
             print(user)
@@ -89,38 +100,49 @@ def main():
                     print(f"  {project}")
             else:
                 print("  No projects")
+        logger.info("Successfully listed projects")
 
     elif args.command == "add-task":
+        logger.info("add-task command called")
         data = load_users()
         project = find_project(args.project_id)
         if project is None:
+            logger.error(f"No project found with ID {args.project_id}")
             print(f"Error: No project found with ID {args.project_id}")
             return
         user_names = [u.name for u in User.all]
         if args.assigned_to not in user_names:
+            logger.error(f"No user found with name '{args.assigned_to}'")
             print(f"Error: No user found with name '{args.assigned_to}'")
             return
         try:
             task = Task(title=args.title, assigned_to=args.assigned_to)
             project.tasks.append(task)
             save_users(data)
+            logger.info(f"Task created: '{task.title}' assigned to {args.assigned_to} in project #{args.project_id}")
             print(f"Task '{task.title}' successfully added")
         except ValueError as e:
+            logger.error(f"Failed to create task: {e}")
             print(f"Error: {e}")
 
     elif args.command == "list-tasks":
+        logger.info("list-tasks command called")
         data = load_users()
         project = find_project(args.project_id)
         if project is None:
+            logger.error(f"No project found with ID {args.project_id}")
             print(f"Error: No project found with ID {args.project_id}")
             return
         for task in project.tasks:
             print(task)
+        logger.info(f"Successfully listed tasks for project #{args.project_id}")
 
     elif args.command == "complete-task":
+        logger.info("complete-task command called")
         data = load_users()
         project = find_project(args.project_id)
         if project is None:
+            logger.error(f"No project found with ID {args.project_id}")
             print(f"Error: No project found with ID {args.project_id}")
             return
         task = None
@@ -129,10 +151,12 @@ def main():
                 task = t
                 break
         if task is None:
+            logger.error(f"No task found with ID {args.task_id}")
             print(f"Error: No task found with ID {args.task_id}")
             return
         task.status = "Completed"
         save_users(data)
+        logger.info(f"Task #{args.task_id} marked as Completed in project #{args.project_id}")
         print(f"Task '{task.title}' updated to '{task.status}'")
             
 
