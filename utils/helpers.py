@@ -10,3 +10,10 @@ def load_users():
 def save_users(data):
     data["users"] = [u.to_dict() for u in User.all]
     save(data)
+
+def find_project(project_id):
+    for user in User.all:
+        for project in user.projects:
+            if project.id == project_id:
+                return project
+    return None

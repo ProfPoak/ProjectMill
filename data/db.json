@@ -10,7 +10,14 @@
                     "title": "Test Project",
                     "description": "A test",
                     "due_date": "2026-12-31",
-                    "tasks": []
+                    "tasks": [
+                        {
+                            "id": 1,
+                            "title": "Research",
+                            "status": "To Do",
+                            "assigned_to": "John"
+                        }
+                    ]
                 }
             ]
         },

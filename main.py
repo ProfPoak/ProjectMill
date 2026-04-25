@@ -2,7 +2,7 @@ import argparse
 from models.user import User
 from models.project import Project
 from models.task import Task
-from utils.helpers import load_users, save_users
+from utils.helpers import load_users, save_users, find_project
 
 def main():
     parser = argparse.ArgumentParser(
@@ -92,7 +92,30 @@ def main():
 
     elif args.command == "add-task":
         data = load_users()
-    
+        project = find_project(args.project_id)
+        if project is None:
+            print(f"Error: No project found with ID {args.project_id}")
+            return
+        user_names = [u.name for u in User.all]
+        if args.assigned_to not in user_names:
+            print(f"Error: No user found with name '{args.assigned_to}'")
+            return
+        try:
+            task = Task(title=args.title, assigned_to=args.assigned_to)
+            project.tasks.append(task)
+            save_users(data)
+            print(f"Task '{task.title}' successfully added")
+        except ValueError as e:
+            print(f"Error: {e}")
+
+    elif args.command == "list-tasks":
+        data = load_users()
+        project = find_project(args.project_id)
+        if project is None:
+            print(f"Error: No project found with ID {args.project_id}")
+            return
+        for task in project.tasks:
+            print(task)
 
 if __name__ == "__main__":
     main()
