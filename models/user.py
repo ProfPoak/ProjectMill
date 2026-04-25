@@ -12,6 +12,9 @@ class User(Person):
         self.projects = []
         User.all.append(self)
 
+    def __str__(self):
+        return f"User #{self.id} | {self.name} | {self.email}"
+
     def to_dict(self):
         return {
             "id": self.id,
